@@ -1,0 +1,40 @@
+{
+	"name": "Dalia_TEMPONet",
+	"n_gpu": 1,
+
+	"arch": {
+		"type": "TEMPONet",
+		"dataset": "PPG_Dalia",
+		"args": {}
+	},
+	"data_loader": {
+		"type": "DaliaDataLoader",
+		"args":{
+			"data_dir": "./",
+			"batch_size": 128,
+			"shuffle": true,
+			"validation_split": 0.1,
+			"num_workers": 0
+		}
+	},
+	"loss": "logcosh",
+	"metrics": [
+		"MAE"
+	],
+	"trainer": {
+		"type": "TEMPONetDaliaTrainer",
+		"epochs": 200,
+
+		"save_dir": "./checkpoints/",
+		"save_period": 1,
+		"verbosity": 2,
+		
+		"monitor": "min val_loss",
+		"early_stop": 20,
+
+		"tensorboard": false,
+		"cross_validation": {
+			"folds": 15
+		}
+	}
+}

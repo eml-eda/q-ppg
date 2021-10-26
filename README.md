@@ -31,8 +31,8 @@ Hearth Rate (HR) monitoring is increasingly performed in wrist-worn devices usin
 ## How to run
 In order to reproduce the flow described in the paper two main steps are required:
 1. Architecture search, simply run:
-    - `python architecture_search/pit_mn.py --root <> --NAS <MN-Size or MN-Flops> --strength <> --threshold <>`
-    - `python architecture_search/pit_mn.py --root <> --NAS <PIT> --learned_ch <x y z ...> --strength <> --warmup <>`
+    - MorphNet Search: `python architecture_search/pit_mn.py --root <> --NAS <MN-Size or MN-Flops> --strength <> --threshold <>`
+    - PIT Search: `python architecture_search/pit_mn.py --root <> --NAS <PIT> --learned_ch <x y z ...> --strength <> --warmup <>`
 
     > **N.B.**,
     > - The path passed as `--root <>` should contains the dataset folder.
@@ -40,8 +40,9 @@ In order to reproduce the flow described in the paper two main steps are require
     > - You need to properly install MorphNet from [here](https://github.com/google-research/morph-net).
     > - In `--learned_ch <x y z ...>` x, y, and z represent the number of channels found with MorphNet search.
 
-2. Precision search:
-    - TODO
+2. Precision search, simply run:
+    - Mixed-Precision Search: `source precision_search/launch_MN_PIT_search_mix.sh`
+    - Static Quantization: `source precision_search/launch_MN_PIT_all.sh <architecture_name> <n_bits>`
 
 ## License
 Q-PPG is released under Apache 2.0, see the LICENSE file in the root of this repository for details.

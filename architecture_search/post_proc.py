@@ -65,53 +65,9 @@ def post_processing(dataset, fine=False):
     print('Median-Post: {}'.format(np.median(MAE_postprocessing)))
     return MAE_postprocessing
 
+path = '5.0e-05_0_data.pickle'
+with open(path, 'rb') as f:
+    dataset = pickle.load(f)
 
-quantz = False
-
-if quantz:
-    output = dict()
-    for i in range(1, 15+1):
-        for n_bit in [2, 4, 8]:
-            if i == 1 and n_bit == 4:
-                continue
-            path = r'C:\Users\Admin\Desktop\net_results\\'+ \
-                'net_results_MN-dil1_net_{}_quantization_{}.pickle'.format(i, n_bit)
-                
-            with open(path, 'rb') as f:
-                dataset = pickle.load(f)
-                
-            MAE = obtain_MAE(dataset)
-            MAE_post = post_processing(dataset)
-            
-            output['Pre_'+str(i)+'_'+str(n_bit)] = np.mean(MAE)
-            output['Post_'+str(i)+'_'+str(n_bit)] = np.mean(MAE_post)
-else:
-    path = r'D:\Admin\Documents\LibriUniversitari\GitHub\ppg-mixed-precision\\' + \
-    r'TRAINING_RESULTS\MN1-PITsmall\\'
-    path = path + '5.0e-05_0_data.pickle'
-    # path = r'G:\Il mio Drive\phd\Works\ppg-mixed-precision\rebuttal\\'
-    # #path = path + 'ppg_only_bestmae.pickle'
-    # path = path + '1.0e+00_1_data_finetune.pickle'
-    # path = r'C:\Users\Admin\Downloads\\'+ \
-    # 'net_results_MN1-PITlargest_net_4_quantization_mix.pickle'
-    with open(path, 'rb') as f:
-        dataset = pickle.load(f)
-    
-    # s = 8
-    # plt.plot(dataset['P'+str(s)+'_label'][950:1050], 'k', linewidth='3.5')
-    # plt.plot(dataset['P'+str(s)+'_pred'][950:1050], 'g')
-    
-    MAE = obtain_MAE(dataset, fine=False)
-    MAE_post = post_processing(dataset, fine=False)
-    
-    
-
-# s = 7
-# plt.plot(dataset['P'+str(s)+'_label'], 'k', linewidth='2.5')
-# plt.plot(dataset['P'+str(s)+'_pred'], 'g')
-
-# plt.plot(dataset['P'+str(s)+'_pred'][950:1050], 'r', linewidth='2.5')
-# plt.axis('off')
-# plt.savefig("post-proc.svg", dpi=1200)
-# plt.show()
-
+MAE = obtain_MAE(dataset, fine=False)
+MAE_post = post_processing(dataset, fine=False)
