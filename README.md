@@ -41,7 +41,7 @@ In order to reproduce the flow described in the paper two main steps are require
     > - In `--learned_ch <x y z ...>` x, y, and z represent the number of channels found with MorphNet search.
 
 2. Precision search, simply run:
-    - Mixed-Precision Search: `source precision_search/launch_MN_PIT_search_mix.sh`
+    - Mixed-Precision Search: `source precision_search/launch_MN_PIT_mix.sh`
     - Static Quantization: `source precision_search/launch_MN_PIT_all.sh <architecture_name> <n_bits>`
 
 ## License
