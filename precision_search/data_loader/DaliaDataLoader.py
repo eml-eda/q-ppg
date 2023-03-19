@@ -54,16 +54,16 @@ class DaliaDataset(Dataset):
     """
     def __init__(self, data_dir, kfold_it=None, set_='train', transform=None):
         super(DaliaDataset, self).__init__()
-        self.data_dir = (data_dir)
-        if not os.path.exists(self.data_dir + 'slimmed_dalia.pkl'):
+        self.data_dir = Path(data_dir)
+        if not os.path.exists(self.data_dir / 'slimmed_dalia.pkl'):
             self.dataset = self._collect_data(self.data_dir)
             self._X, self._y, self._groups = self._preprocess_data(self.dataset)
         else:
-            with open(self.data_dir + '/slimmed_dalia.pkl', 'rb') as f:
+            with open(self.data_dir / 'slimmed_dalia.pkl', 'rb') as f:
                 self.dataset = pickle.load(f, encoding='latin1')
             self._groups = self.dataset['groups']
-            self._X = self.dataset['X']
-            self._y = self.dataset['y']
+            self._X = self.dataset['X'].astype('float32')
+            self._y = self.dataset['y'].astype('float32')
         self.transform = transform
         
         self.kfold_it = kfold_it

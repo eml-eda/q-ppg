@@ -50,7 +50,7 @@ parser.add_argument('--wd', '--weight-decay', default=0, type=float,
 parser.add_argument('--ad', '--alpha-decay', default=1e-4, type=float,
                     metavar='A', help='alpha decay (default: 1e-4)',
                     dest='alpha_decay')
-parser.add_argument('--complexity-decay', '--cd', default=0.0001,
+parser.add_argument('--complexity-decay', '--cd', default=0.0001, type=float,
                     metavar='W', help='complexity decay (default: 1e-4)', dest='complexity_decay')
 parser.add_argument('--gpu', default=None, type=int,
                     help='GPU id to use.')

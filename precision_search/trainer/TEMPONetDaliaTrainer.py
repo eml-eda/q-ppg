@@ -164,7 +164,7 @@ class TEMPONetDaliaTrainer(BaseTrainer):
                     loss_complexity = self.cd * self.model.module.complexity_loss()
                 else:
                     loss_complexity = self.cd * self.model.complexity_loss()
-                loss += loss_complexity
+                loss = loss + loss_complexity
 
             loss.backward()
             if self.arch_optimizer != False:
